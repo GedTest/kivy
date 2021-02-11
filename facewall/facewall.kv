@@ -1,0 +1,105 @@
+<Image>
+    y: self.parent.y + 10
+    x: self.parent.x
+    allow_stretch: True
+    keep_ratio: True
+    size_hint: (None, None)
+
+<Widgets>:
+    GridLayout:
+        size: root.width, root.height
+        cols: 2
+
+        GridLayout:
+            col_default_width: root.width * 0.75
+            col_force_default: True
+
+            rows: 6
+            Button:
+                text: "My friends"
+                size_hint: 1.0, 0.4
+
+            GridLayout:
+                cols: 4
+                Image:
+                    source: 'user_images/AN.png'
+                    size: (root.width/8, root.height/8)
+                Label:
+                    text: "Name: Anna Nováková"
+                Label:
+                    text: "Věk: 18"
+                Label:
+                    text: "Info: Lorem ipsum..."
+
+            GridLayout:
+                cols: 4
+                Image:
+                    source: 'user_images/VR.png'
+                    size: (root.width/8, root.height/8)
+                Label:
+                    text: "Name: Vanessa Ramirez"
+                Label:
+                    text: "Věk: 20"
+                Label:
+                    text: "Info: Lorem ipsum..."
+
+            GridLayout:
+                cols: 4
+                Image:
+                    source: 'user_images/WS.png'
+                    size: (root.width/8, root.height/8)
+                Label:
+                    text: "Name: William Smith"
+                Label:
+                    text: "Věk: 45"
+                Label:
+                    text: "Info: Lorem ipsum..."
+
+            GridLayout:
+                cols: 4
+                Image:
+                    source: 'user_images/OZ.png'
+                    size: (root.width/8, root.height/8)
+                Label:
+                    text: "Name: Oliver Zambezi"
+                Label:
+                    text: "Věk: 17"
+                Label:
+                    text: "Info: Lorem ipsum..."
+
+
+
+
+        GridLayout:
+            col_default_width: root.width * 0.25
+            col_force_default: True
+            size_hint: (0.33, 1)
+            rows: 2
+
+            Button:
+                text: "People"
+                size_hint: 1.0, 0.1
+
+            GridLayout:
+                row_default_height: root.height * 0.15
+                row_force_default: True
+                cols: 2
+
+                Button:
+                    Image:
+                        source: 'user_images/AN.png'
+                        size: (root.width/8, root.height/8)
+                Button:
+                    Image:
+                        source: 'user_images/VR.png'
+                        size: (root.width/8, root.height/8)
+                Button:
+                    Image:
+                        source: 'user_images/WS.png'
+                        size: (root.width/8, root.height/8)
+                Button:
+                    Image:
+                        source: 'user_images/OZ.png'
+                        size: (root.width/8, root.height/8)
+
+
