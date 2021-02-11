@@ -1,28 +1,30 @@
 import kivy
 from kivy.app import App
-from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.widget import Widget
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.popup import Popup
 
 
-class MainWindow(Screen):
+class Widgets(Widget):
+    def btn(self):
+        show_popup()
+
+
+class P(FloatLayout):
     pass
 
 
-class SecondWindow(Screen):
-    pass
-
-
-class WindowManager(ScreenManager):
-    pass
-
-
-kv = Builder.load_file("my.kv")
-
-
-class MyMainApp(App):
+class MyApp(App):
     def build(self):
-        return kv
+        return Widgets()
+
+
+def show_popup():
+    show = P()
+    popup_window = Popup(title="Popup window", content=show, size_hint=(None, None), size=(400, 400))
+
+    popup_window.open()
 
 
 if __name__ == "__main__":
-    MyMainApp().run()
+    MyApp().run()
