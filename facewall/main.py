@@ -40,7 +40,7 @@ class DragLabel(DraggableObjectBehavior, Label):
         btn_initials = label.source.split("/")[1].split(".")[0]
 
         n_u = Widgets().persons[btn_initials]
-        print(n_u)
+       # print(n_u)
 
         popup_instance = PersonWindow()
 
