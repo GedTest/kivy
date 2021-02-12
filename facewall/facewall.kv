@@ -5,101 +5,38 @@
     keep_ratio: True
     size_hint: (None, None)
 
-<Widgets>:
-    GridLayout:
-        size: root.width, root.height
-        cols: 2
+<PersonWindow>:
+    Image:
+        pos_hint: {'y': 0.65}
+        source: 'user_images/AN.png'
+    Label:
+        text: root.user_name
+        size_hint: 0.6, 0.2
+        pos_hint: {"x": 0.2, "top":1}
+    Label:
+        text: root.user_age
+        size_hint: 0.6, 0.2
+        pos_hint: {"x": 0.2, "top":0.8}
+    Label:
+        text: root.user_country
+        size_hint: 0.6, 0.2
+        pos_hint: {"x": 0.2, "top":0.6}
 
-        GridLayout:
-            col_default_width: root.width * 0.75
-            col_force_default: True
+    Label:
+        text: root.user_info
+        size_hint: 0.6, 0.2
+        pos_hint: {"x": 0.2, "top":0.4}
 
-            rows: 6
-            Button:
-                text: "My friends"
-                size_hint: 1.0, 0.4
-
-            GridLayout:
-                cols: 4
-                Image:
-                    source: 'user_images/AN.png'
-                    size: (root.width/8, root.height/8)
-                Label:
-                    text: "Name: Anna Nováková"
-                Label:
-                    text: "Věk: 18"
-                Label:
-                    text: "Info: Lorem ipsum..."
-
-            GridLayout:
-                cols: 4
-                Image:
-                    source: 'user_images/VR.png'
-                    size: (root.width/8, root.height/8)
-                Label:
-                    text: "Name: Vanessa Ramirez"
-                Label:
-                    text: "Věk: 20"
-                Label:
-                    text: "Info: Lorem ipsum..."
-
-            GridLayout:
-                cols: 4
-                Image:
-                    source: 'user_images/WS.png'
-                    size: (root.width/8, root.height/8)
-                Label:
-                    text: "Name: William Smith"
-                Label:
-                    text: "Věk: 45"
-                Label:
-                    text: "Info: Lorem ipsum..."
-
-            GridLayout:
-                cols: 4
-                Image:
-                    source: 'user_images/OZ.png'
-                    size: (root.width/8, root.height/8)
-                Label:
-                    text: "Name: Oliver Zambezi"
-                Label:
-                    text: "Věk: 17"
-                Label:
-                    text: "Info: Lorem ipsum..."
-
-
-
-
-        GridLayout:
-            col_default_width: root.width * 0.25
-            col_force_default: True
-            size_hint: (0.33, 1)
-            rows: 2
-
-            Button:
-                text: "People"
-                size_hint: 1.0, 0.1
-
-            GridLayout:
-                row_default_height: root.height * 0.15
-                row_force_default: True
-                cols: 2
-
-                Button:
-                    Image:
-                        source: 'user_images/AN.png'
-                        size: (root.width/8, root.height/8)
-                Button:
-                    Image:
-                        source: 'user_images/VR.png'
-                        size: (root.width/8, root.height/8)
-                Button:
-                    Image:
-                        source: 'user_images/WS.png'
-                        size: (root.width/8, root.height/8)
-                Button:
-                    Image:
-                        source: 'user_images/OZ.png'
-                        size: (root.width/8, root.height/8)
-
-
+<DraggableBoxLayout>:
+    drag_classes: ['person']
+    orientation: 'vertical'
+    DragLabel:
+        drag_cls: 'person'
+        Image:
+            source: 'user_images/AN.png'
+            size: (root.width/8, root.height/8)
+        Button:
+            size: (self.parent.size[0]/3, self.parent.size[1]/3)
+            pos: (self.parent.pos[0], self.parent.pos[1])
+            text: "Info"
+            on_release: self.parent.show_info()

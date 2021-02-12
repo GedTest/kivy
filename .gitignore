@@ -1,2 +1,5 @@
 .idea/
+__pycache__/
 venv/
+drag_n_drop_tests/
+kivy_dnd_test/
