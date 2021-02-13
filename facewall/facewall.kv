@@ -8,7 +8,7 @@
 <PersonWindow>:
     Image:
         pos_hint: {'y': 0.65}
-        source: 'user_images/AN.png'
+        source: root.user_image
     Label:
         text: root.user_name
         size_hint: 0.6, 0.2
@@ -27,16 +27,70 @@
         size_hint: 0.6, 0.2
         pos_hint: {"x": 0.2, "top":0.4}
 
-<DraggableBoxLayout>:
-    drag_classes: ['person']
-    orientation: 'vertical'
-    DragLabel:
-        drag_cls: 'person'
-        Image:
-            source: 'user_images/AN.png'
-            size: (root.width/8, root.height/8)
-        Button:
-            size: (self.parent.size[0]/3, self.parent.size[1]/3)
-            pos: (self.parent.pos[0], self.parent.pos[1])
-            text: "Info"
-            on_release: self.parent.show_info()
+<PersonWidget>:
+    DraggableBoxLayout:
+        drag_classes: ['person']
+        orientation: 'vertical'
+        DragLabel:
+            drag_cls: 'person'
+            Image:
+                source: root.initials
+                size: (root.width/1.2, root.height/1.2)
+            Button:
+                size: (self.parent.size[0]/3, self.parent.size[1]/3)
+                pos: (self.parent.pos[0], self.parent.pos[1])
+                text: "Info"
+                on_release: self.parent.show_info()
+
+
+<Widgets>:
+    GridLayout:
+        size: root.width, root.height
+        cols: 2
+
+        GridLayout:
+            col_default_width: root.width * 0.75
+            col_force_default: True
+
+            rows: 6
+            Button:
+                text: "My friends"
+                size_hint: 1.0, 0.4
+
+            DraggableBoxLayout:
+                drag_classes: ['person']
+                orientation: 'vertical'
+                canvas:
+                    Color:
+                        rgba: (1, 1, 1, .2) if app.drag_controller.dragging and app.drag_controller.widget_dragged and app.drag_controller.widget_dragged.drag_cls == 'person' else (0, 0, 0, 0)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                GridLayout:
+                    cols: 4
+                    Image:
+                        source: 'user_images/VR.png'
+                        size: (root.width/8, root.height/8)
+                    Label:
+                        text: "Name: Vanessa Ramirez"
+                    Label:
+                        text: "Age: 20"
+                    Label:
+                        text: "Info: Lorem ipsum..."
+
+        GridLayout:
+            col_default_width: root.width * 0.25
+            col_force_default: True
+            size_hint: (0.33, 1)
+            rows: 2
+
+            Button:
+                text: "People"
+                size_hint: 1.0, 0.1
+
+            GridLayout:
+                row_default_height: root.height * 0.15
+                row_force_default: True
+                cols: 2
+                id: people
