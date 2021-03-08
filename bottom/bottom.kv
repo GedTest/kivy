@@ -22,7 +22,7 @@ BoxLayout:
             text: 'BMI'
             icon: 'text'
 
-            TextScreen:
+            BMIScreen:
 
         MDBottomNavigationItem:
             name: 'screen 2'
@@ -38,42 +38,39 @@ BoxLayout:
 
             TableScreen:
 
-
-<TextScreen>:
-    name: 'textscreen'
+<BMIScreen>:
+    name: 'bmiscreen'
 
     FloatLayout:
         canvas:
             Color:
-                rgba: 0.65, 0.35, 0, 1
-            RoundedRectangle:
+                rgba: 0.25, 0.25, 0.25, 1
+            Rectangle:
                 pos: self.pos
                 size: self.size
-                radius: [0, 25, 0, 0]
 
         MDLabel:
-            id: label
-            text: 'Hi I am  label!'
+            text: 'Vypočítat své BMI: '
             size_hint: (.5, .1)
-            pos_hint: {'center_x': .5, 'center_y': .9}
+            pos_hint: {'center_x': .5, 'center_y': .45}
             font_style: 'H5'
             canvas.before:
                 Color:
-                    rgba: 0, .5, 1, 1
+                    rgba: 1, 0.75, 0.2, 1
                 RoundedRectangle:
                     pos: self.pos
                     size: self.size
 
         BoxLayout:
             orientation: 'horizontal'
-            size_hint_x: .8
+            size_hint_x: .2
             size_hint_y: 0.1
-            pos_hint: {'center_x': .5}
+            pos_hint: {'center_x': .35, 'y': .6}
             height: self.minimum_height
             spacing: 10
             canvas.before:
                 Color:
-                    rgba: .5, .5, 0, 1
+                    rgba: 1, 1, 1, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -82,7 +79,7 @@ BoxLayout:
                 text: "Váha"
                 canvas.before:
                     Color:
-                        rgba: 1, 1, 1, 0.5
+                        rgba: 1, 0.75, 0.2, 1
                     Rectangle:
                         pos: self.pos
                         size: self.size
@@ -94,14 +91,14 @@ BoxLayout:
 
         BoxLayout:
             orientation: 'horizontal'
-            size_hint_x: .8
+            size_hint_x: .2
             size_hint_y: 0.1
-            pos_hint: {'center_x': .5, 'center_y': .4}
+            pos_hint: {'center_x': .65, 'y': .6}
             height: self.minimum_height
             spacing: 10
             canvas.before:
                 Color:
-                    rgba: .5, .5, 0, 1
+                    rgba: 1, 1, 1, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -110,7 +107,7 @@ BoxLayout:
                 text: "Výška"
                 canvas.before:
                     Color:
-                        rgba: 1, 1, 1, 0.5
+                        rgba: 1, 0.75, 0.2, 1
                     Rectangle:
                         pos: self.pos
                         size: self.size
@@ -119,14 +116,30 @@ BoxLayout:
                 id: vyska
                 mode: 'fill'
 
+        MDLabel:
+            text: "Vaše BMI: "
+            size_hint: (.5, .15)
+            pos_hint: {'center_x': .5, 'center_y': .25}
+            canvas.before:
+                Color:
+                    rgba: 1, 0.75, 0.2, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+
+        MDLabel:
+            id: label
+            text: ""
+            size_hint: (.5, .15)
+            pos_hint: {'center_x': .6, 'center_y': .25}
+
 
         MDRaisedButton:
-            text: "Vypočítej"
+            text: "Vypočítat!"
             md_bg_color: 0.4, 0.4, 0.4, 1
-            pos_hint: {'center_x': .65, 'center_y': .9}
+            pos_hint: {'center_x': .65, 'center_y': .45}
             on_press:
-                print("Stisknuto třeba!")
-                root.ids.label.text = str(int(root.ids.vaha.text) / ((int(root.ids.vyska.text)/100) ** 2))
+                root.ids.label.text = str(round(int(root.ids.vaha.text) / ((int(root.ids.vyska.text)/100) ** 2), 2))
 
 <FormScreen>
     name:'formscreen'

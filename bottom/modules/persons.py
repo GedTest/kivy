@@ -1,3 +1,4 @@
+import json
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivymd.uix.list import MDList, TwoLineAvatarListItem, ImageLeftWidget
@@ -7,6 +8,12 @@ person_list = [
     {"name": "William Smith", "state": "USA", "img": "images/WS.png"},
     {"name": "Vanessa Ramirez", "state": "IND", "img": "images/VR.png"}
 ]
+
+
+def get_persons():
+    with open('persons.json', "r") as file:
+        p = json.load(file)
+        print(p)
 
 
 class MyItem(TwoLineAvatarListItem):
@@ -41,3 +48,4 @@ class Persons(BoxLayout):
 
         scroll_view.add_widget(list_of_persons)
         self.add_widget(scroll_view)
+        print(get_persons())

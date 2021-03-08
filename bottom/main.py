@@ -4,7 +4,7 @@ from kivy.lang import Builder
 from modules.persons import Persons
 
 
-class TextScreen(Screen):
+class BMIScreen(Screen):
     pass
 
 
