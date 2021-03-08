@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "name": "Anna Nováková",
+      "state": "CZE",
+      "img": "images/AN.png"
+    },
+    {
+      "name": "William Smith",
+      "state": "USA",
+      "img": "images/WS.png"
+    },
+    {
+      "name": "Vanessa Ramirez",
+      "state": "IND",
+      "img": "images/VR.png"
+    }
+  ]
+}
