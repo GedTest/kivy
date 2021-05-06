@@ -70,7 +70,7 @@ class Database:
     DB_ENGINE = {
         SQLITE: 'sqlite:///{DB}',
         MYSQL: 'mysql+mysqlconnector://{USERNAME}:{PASSWORD}@localhost/{DB}'
-    }
+     }
 
     def __init__(self, dbtype='sqlite', username='', password='', dbname='lego.db'):
         dbtype = dbtype.lower()
@@ -119,8 +119,9 @@ class Database:
     def delete(self, table, id):
         try:
             table_in_db = self.read_by_id(table, id)
-            self.session.delete(table_in_db)
-            self.session.commit()
-            return True
+            if table_in_db:
+                self.session.delete(table_in_db)
+                self.session.commit()
+                return True
         except:
             return False

@@ -1,0 +1,23 @@
+<Card>:
+    Image:
+        source: root.img
+    MDLabel:
+        text: root.text
+
+
+MDScreen:
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+
+        MDToolbar:
+            elevation: 10
+            title: "MDCardSwipe"
+
+        ScrollView:
+            scroll_timeout : 100
+
+            MDList:
+                id: md_list
+                padding: 0
