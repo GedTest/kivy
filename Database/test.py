@@ -1,4 +1,4 @@
-from database import *
+from Database.database import *
 
 db = Database(dbtype='sqlite', dbname='LEGO.db')
 

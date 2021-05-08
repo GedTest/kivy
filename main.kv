@@ -1,23 +1,112 @@
-<Card>:
-    Image:
-        source: root.img
+#:include Screens/Screens.kv
+
+
+
+<ItemDrawer>:
+    theme_text_color: "Custom"
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+
+
+<ContentNavigationDrawer>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "250dp", "250dp"
+            source: "img/LEGO_LOGO.png"
+
     MDLabel:
-        text: root.text
+        text: "LEGO Catalog"
+        font_style: "Button"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDLabel:
+        text: "Made by Viktor Zwinger"
+        font_style: "Caption"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    ScrollView:
+        DrawerList:
+            id: md_list
+
+            ItemDrawer:
+                text: "Bricks"
+                icon: "toy-brick"
+                on_release:
+                    root.screen_manager.current = "brick_screen"
+                    root.screen_manager.transition.direction = 'right'
+                    root.set_database_objects("Brick")
+                    app.root.ids.brick_screen.redraw()
+                    root.nav_drawer.set_state("close")
+
+            ItemDrawer:
+                text: "Manuals"
+                icon: "book-open-page-variant"
+                on_release:
+                    root.screen_manager.current = "manual_screen"
+                    root.screen_manager.transition.direction = 'left'
+                    root.set_database_objects("Manual")
+                    app.root.ids.manual_screen.redraw()
+                    root.nav_drawer.set_state("close")
+
+            ItemDrawer:
+                text: "Sets"
+                icon: "package-variant"
+                on_release:
+                    root.screen_manager.current = "set_screen"
+                    root.screen_manager.transition.direction = 'left'
+                    root.set_database_objects("Set")
+                    app.root.ids.set_screen.redraw()
+                    root.nav_drawer.set_state("close")
 
 
-MDScreen:
+Screen:
+    MDToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
+        elevation: 10
+        title: "LEGO Catalog"
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
 
-    MDBoxLayout:
-        orientation: "vertical"
-        spacing: "10dp"
+    MDNavigationLayout:
+        x: toolbar.height
 
-        MDToolbar:
-            elevation: 10
-            title: "MDCardSwipe"
+        ScreenManager:
+            id: screen_manager
 
-        ScrollView:
-            scroll_timeout : 100
+            Screen:
+                name: "brick_screen"
+                Screens:
+                    id: brick_screen
 
-            MDList:
-                id: md_list
-                padding: 0
+            Screen:
+                name: "manual_screen"
+                Screens:
+                    id: manual_screen
+
+            Screen:
+                name: "set_screen"
+                Screens:
+                    id: set_screen
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                id: content_drawer
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
