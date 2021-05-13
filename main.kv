@@ -82,6 +82,11 @@ Screen:
         title: "LEGO Catalog"
         left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
 
+        MDFillRoundFlatIconButton:
+            icon: 'plus'
+            text: 'Add new'
+            on_release: app.create_new()
+
     MDNavigationLayout:
         x: toolbar.height
 

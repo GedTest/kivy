@@ -1,3 +1,6 @@
+#:include Screens/EditPopup.kv
+
+
 <Card>:
     Image:
         id: card_img
@@ -9,6 +12,9 @@
 
 <Screens>
     orientation: "vertical"
+    pos_hint: {"top": .9}
+    size_hint_y: .9
+
 
 <MDLabel>
     size_hint_y: .1
@@ -25,3 +31,6 @@
     height: "300dp"
 
     MDSeparator:
+
+<MDTextField>
+    id: 'edit_year'

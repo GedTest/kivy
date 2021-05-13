@@ -1,0 +1,34 @@
+<Edit>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    height: "250dp"
+
+    MDTextField:
+        id: edit_name
+        hint_text: 'Name'
+        color_mode: 'accent'
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "The field must be filled out"
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+    MDTextField:
+        id: edit_color
+        hint_text: 'Color'
+        color_mode: 'accent'
+        pos_hint: {'center_x': .5, 'center_y': .3}
+
+    MDTextField:
+        id: edit_type
+        hint_text: 'Type'
+        color_mode: 'accent'
+        pos_hint: {'center_x': .5, 'center_y': .3}
+
+#    MDDropDownItem:
+#        id: edit_type
+#        pos_hint: {'center_x': .5, 'center_y': .4}
+#        size_hint_x: 1
+#        text: 'Type'
+#        color_mode: 'accent'
+#        on_release: self.parent.types.open()

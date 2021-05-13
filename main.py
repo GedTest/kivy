@@ -2,9 +2,15 @@ import os
 
 from kivy.properties import StringProperty, ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
+
+from Screens.DeletePopup import CreatePopup
+from kivymd.uix.button import MDFlatButton
+
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.list import OneLineIconListItem, MDList
 from kivymd.app import MDApp
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.textfield import MDTextField
 
 from Screens.Screens import Screens
 from Database.database import Database, Brick, Manual, Set
@@ -24,10 +30,13 @@ class ContentNavigationDrawer(BoxLayout):
 
     def set_database_objects(self, cls_name):
         if cls_name == "Brick":
+            self.app.current_type = Brick()
             self.app.database_objects = self.app.db.read(Brick, Brick.name)
         elif cls_name == "Manual":
+            self.app.current_type = Manual()
             self.app.database_objects = self.app.db.read(Manual, Manual.name)
         else:
+            self.app.current_type = Set()
             self.app.database_objects = self.app.db.read(Set, Set.name)
 
 
@@ -44,12 +53,17 @@ class DrawerList(ThemableBehavior, MDList):
 
 
 class MainApp(MDApp):
+    current_type = Brick()
     db = Database(dbtype='sqlite', dbname='LEGO.db')
     database_objects = db.read(Brick, Brick.name)
     root_path = os.path.dirname(os.path.realpath(__file__))
 
     def build(self):
         return
+
+    def create_new(self):
+        create_popup = CreatePopup()
+        create_popup.open()
 
 
 MainApp().run()
