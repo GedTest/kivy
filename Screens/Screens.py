@@ -1,6 +1,8 @@
 from kivymd.app import MDApp
 from kivymd.uix.card import MDCard
+from kivy.uix.scrollview import ScrollView
 from kivymd.uix.boxlayout import MDBoxLayout
+
 from DetailPopup import DetailPopup
 
 
@@ -17,6 +19,10 @@ class Card(MDCard):
         popup.open()
 
 
+class ScrollList(ScrollView):
+    pass
+
+
 class Screens(MDBoxLayout):
 
     def __init__(self, **kwargs):
@@ -26,8 +32,11 @@ class Screens(MDBoxLayout):
 
     def redraw(self):
         self.clear_widgets()
+        scroll_list = ScrollList()
         database_objects = self.app.database_objects
 
         for object in database_objects:
             new_card = Card(obj=object)
-            self.add_widget(new_card)
+            scroll_list.ids.card_list.add_widget(new_card)
+
+        self.add_widget(scroll_list)

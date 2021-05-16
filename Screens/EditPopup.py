@@ -86,4 +86,4 @@ class EditablePopup(MDDialog):
         self.dismiss()
 
     def validate(self, str, default_value):
-        return str if (str!='') else default_value
+        return str if (str != '') else default_value

@@ -3,7 +3,7 @@ import os
 from kivy.properties import StringProperty, ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 
-from Screens.DeletePopup import CreatePopup
+from Screens.CreatePopup import CreatePopup
 from kivymd.uix.button import MDFlatButton
 
 from kivymd.theming import ThemableBehavior
@@ -59,6 +59,7 @@ class MainApp(MDApp):
     root_path = os.path.dirname(os.path.realpath(__file__))
 
     def build(self):
+        self.theme_cls.primary_palette = 'Red'
         return
 
     def create_new(self):

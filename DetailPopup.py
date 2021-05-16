@@ -45,7 +45,6 @@ class DetailPopup(MDDialog):
     def __init__(self, id, cls):
         self.app = MDApp.get_running_app()
         self.item = self.app.db.read_by_id(cls, id)
-
         super().__init__(
             type="custom",
             content_cls=PopupContent(self.item),
@@ -63,10 +62,10 @@ class DetailPopup(MDDialog):
         self.dismiss()
 
     def edit_item(self, *args):
-        self.popup = EditablePopup(item=self.item, editing_item=self)
-        self.popup.open()
+        popup = EditablePopup(item=self.item, editing_item=self)
+        popup.open()
 
     def delete_item(self, *args):
-        self.app.db.delete(self.app.current_type, self.item.id)
+        self.app.db.delete(type(self.item), self.item.id)
        # redraw()
         self.dismiss()
