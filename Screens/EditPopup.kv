@@ -5,12 +5,15 @@
     height: "250dp"
 
     MDTextField:
+        id: edit_id
+        hint_text: 'Id'
+        color_mode: 'accent'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+    MDTextField:
         id: edit_name
         hint_text: 'Name'
         color_mode: 'accent'
-        required: True
-        helper_text_mode: "on_error"
-        helper_text: "The field must be filled out"
         pos_hint: {'center_x': .5, 'center_y': .9}
 
     MDTextField:
@@ -19,16 +22,30 @@
         color_mode: 'accent'
         pos_hint: {'center_x': .5, 'center_y': .3}
 
-    MDTextField:
+    MDDropDownItem:
         id: edit_type
-        hint_text: 'Type'
+        pos_hint: {'center_x': .5, 'center_y': .4}
+        size_hint_x: 1
+        text: 'Type'
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "The field must be filled out"
         color_mode: 'accent'
-        pos_hint: {'center_x': .5, 'center_y': .3}
+        on_release: self.parent.menu_types.open()
 
-#    MDDropDownItem:
-#        id: edit_type
-#        pos_hint: {'center_x': .5, 'center_y': .4}
-#        size_hint_x: 1
-#        text: 'Type'
-#        color_mode: 'accent'
-#        on_release: self.parent.types.open()
+    MDDropDownItem:
+        id: edit_foreign_key
+        pos_hint: {'center_x': .5, 'center_y': .4}
+        size_hint_x: 1
+        text: 'Assign set'
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "The field must be filled out"
+        color_mode: 'accent'
+        on_release: self.parent.menu_types.open()
+
+    MDRoundFlatIconButton:
+        text: "Open manager"
+        icon: "folder"
+        pos_hint: {'center_x': .5, 'center_y': .6}
+        on_release: root.file_manager_open()

@@ -43,6 +43,7 @@ class PopupContent(BoxLayout):
 
 class DetailPopup(MDDialog):
     def __init__(self, id, cls):
+
         self.app = MDApp.get_running_app()
         self.item = self.app.db.read_by_id(cls, id)
         super().__init__(
@@ -67,5 +68,7 @@ class DetailPopup(MDDialog):
 
     def delete_item(self, *args):
         self.app.db.delete(type(self.item), self.item.id)
-       # redraw()
+
+        self.app.redraw_screen_with_item(self.item)
+
         self.dismiss()

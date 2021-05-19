@@ -30,14 +30,13 @@ class ContentNavigationDrawer(BoxLayout):
 
     def set_database_objects(self, cls_name):
         if cls_name == "Brick":
-            self.app.current_type = Brick()
-            self.app.database_objects = self.app.db.read(Brick, Brick.name)
+            self.app.database_objects = self.app.db.read(Brick, Brick.color)
         elif cls_name == "Manual":
-            self.app.current_type = Manual()
-            self.app.database_objects = self.app.db.read(Manual, Manual.name)
+            self.app.database_objects = self.app.db.read(Manual)
         else:
-            self.app.current_type = Set()
-            self.app.database_objects = self.app.db.read(Set, Set.name)
+            self.app.database_objects = self.app.db.read(Set)
+
+        self.app.current_type = self.app.database_objects[0]
 
 
 class DrawerList(ThemableBehavior, MDList):
@@ -53,9 +52,9 @@ class DrawerList(ThemableBehavior, MDList):
 
 
 class MainApp(MDApp):
-    current_type = Brick()
     db = Database(dbtype='sqlite', dbname='LEGO.db')
     database_objects = db.read(Brick, Brick.name)
+    current_type = database_objects[0]
     root_path = os.path.dirname(os.path.realpath(__file__))
 
     def build(self):
@@ -65,6 +64,18 @@ class MainApp(MDApp):
     def create_new(self):
         create_popup = CreatePopup()
         create_popup.open()
+
+    def redraw_screen_with_item(self, item):
+        app = MDApp.get_running_app()
+
+        if isinstance(item, Brick):
+            app.root.ids.brick_screen.redraw()
+
+        elif isinstance(item, Manual):
+            app.root.ids.manual_screen.redraw()
+
+        elif isinstance(item, Set):
+            app.root.ids.set_screen.redraw()
 
 
 MainApp().run()

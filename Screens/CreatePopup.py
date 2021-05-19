@@ -1,4 +1,4 @@
-from Screens.EditPopup import Edit
+from Screens.EditPopup import Edit, validate, DEFAULT_IMAGE
 from kivymd.uix.button import MDFlatButton
 
 from kivymd.uix.dialog import MDDialog
@@ -28,29 +28,34 @@ class CreatePopup(MDDialog):
 
         if isinstance(app.current_type, Brick):
             brick = Brick()
-            brick.name = self.validate(self.content_cls.ids.edit_name.text, 'sample text')
-            brick.color = self.validate(self.content_cls.ids.edit_color.text, '#')
-            brick.type = self.validate(self.content_cls.ids.edit_type.text, 'standard')
-            brick.image = 'Brick/4568385Animal_Body_Part_Claw_Tooth_Horn_Small_-_Black.jpg'
+            last_id = app.db.read_last_id(Brick)
+            brick.id = validate(self.content_cls.ids.edit_id.text, last_id + 1)
+            brick.name = validate(self.content_cls.ids.edit_name.text, 'sample text')
+            brick.color = validate(self.content_cls.ids.edit_color.text, '#')
+            brick.type = validate(self.content_cls.ids.edit_type.text, 'standard', 'Type')
+            brick.image = validate(self.content_cls.image, DEFAULT_IMAGE)
+            print("Brick.img: ",brick.image)
             app.db.create(brick)
 
         elif isinstance(app.current_type, Manual):
             manual = Manual()
-            manual.name = self.validate(self.content_cls.ids.edit_name.text, 'sample text')
-            manual.number_of_pages = self.validate(self.content_cls.widgets['number_of_pages'].text, 0)
-            manual.image = 'Manual/Fierce-flyer-manual.jpg'
+            last_id = app.db.read_last_id(Manual)
+            manual.id = validate(self.content_cls.ids.edit_id.text, last_id + 1)
+            manual.name = validate(self.content_cls.ids.edit_name.text, 'sample text')
+            manual.number_of_pages = validate(self.content_cls.widgets['number_of_pages'].text, 0)
+            manual.image = validate(self.content_cls.image, DEFAULT_IMAGE)
             app.db.create(manual)
 
         elif isinstance(app.current_type, Set):
             set = Set()
-            set.name = self.validate(self.content_cls.ids.edit_name.text, 'sample text')
-            set.year = self.validate(self.content_cls.widgets['year'].text, 0)
-            set.number_of_pieces = self.validate(self.content_cls.widgets['number_of_pieces'].text, 0)
-            set.price = self.validate(self.content_cls.widgets['price'].text, 0)
-            set.image = 'Set/31004Fierce-flyer.jpg'
+            last_id = app.db.read_last_id(Set)
+            set.id = validate(self.content_cls.ids.edit_id.text, last_id + 1)
+            set.name = validate(self.content_cls.ids.edit_name.text, 'sample text')
+            set.year = validate(self.content_cls.widgets['year'].text, 0)
+            set.number_of_pieces = validate(self.content_cls.widgets['number_of_pieces'].text, 0)
+            set.price = validate(self.content_cls.widgets['price'].text, 0)
+            set.image = validate(self.content_cls.image, DEFAULT_IMAGE)
             app.db.create(set)
 
+        app.redraw_screen_with_item(app.current_type)
         self.dismiss()
-
-    def validate(self, str, default_value):
-        return str if (str != '') else default_value

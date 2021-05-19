@@ -88,7 +88,7 @@ class Database:
     # # # # # # # # # #
     # CRUD METHODS
     # # # # # # # # # #
-    def read(self, table, order=""):
+    def read(self, table, order="name"):
         return self.session.query(table).order_by(order).all()
 
     def read_by_id(self, table, id):
@@ -100,6 +100,12 @@ class Database:
 
     def read_by_name(self, table, name):
         return self.session.query(table).filter(table.name.like(f'%{name}%')).all()
+
+    def read_last_id(self, table):
+        try:
+            return self.session.query(table).order_by(table.id.desc()).first().id
+        except:
+            return 0
 
     def create(self, table):
         try:

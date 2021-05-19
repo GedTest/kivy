@@ -1,3 +1,4 @@
+from Database.database import Brick
 from kivymd.app import MDApp
 from kivymd.uix.card import MDCard
 from kivy.uix.scrollview import ScrollView
@@ -33,7 +34,7 @@ class Screens(MDBoxLayout):
     def redraw(self):
         self.clear_widgets()
         scroll_list = ScrollList()
-        database_objects = self.app.database_objects
+        database_objects = self.app.db.read(type(self.app.current_type))
 
         for object in database_objects:
             new_card = Card(obj=object)
